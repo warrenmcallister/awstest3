@@ -1,0 +1,1 @@
+module.exports = (json) => (req, res) => res.json(json)
