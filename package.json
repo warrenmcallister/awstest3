@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "lodash": "^4.17.4",
+    "mysql": "^2.15.0",
     "nanoid": "^1.0.0"
   },
   "scripts": {

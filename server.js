@@ -1,4 +1,5 @@
 const express = require('express')
+const pool = require('./db/pool')
 const users = require('./data/users.json')
 const products = require('./data/products.json')
 const messages = require('./data/messages.json')
@@ -32,11 +33,15 @@ app.get('/users', (req, res) => res.json(users))
 app.get('/products', (req, res) => res.json(products))
 app.get('/messages', (req, res) => res.json(messages))
 app.get('/db', (req, res) => {
-  res.json({
-    host: process.env.RDS_HOSTNAME,
-    user: process.env.RDS_USERNAME,
-    password: process.env.RDS_PASSWORD,
-    port: process.env.RDS_PORT
+  pool.query('SELECT version()', (err, ...rest) => {
+    if (err) {
+      res.json({
+        error: err.message
+      })
+    }
+    res.json({
+      ok: true
+    })
   })
 })
 
