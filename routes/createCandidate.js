@@ -9,9 +9,11 @@ const createCandidate = (req, res) => {
     })
   }
   const cId = `${name.toLowerCase().replace(' ', '-')}-${id()}`
-  query('INSERT INTO candidates VALUES (?, ?)', [cId, 0]).then(candidates => {
-    const json = candidates.map(({ id, completed }) => ({ id, completed: Boolean(completed) }))
-    res.json(json)
+  query('INSERT INTO candidates VALUES (?, ?)', [cId, 0]).then(response => {
+    res.json({
+      success: true,
+      hint: `Candidate "${cId}" successfully created!`
+    })
   }).catch(error => ({
     error: 'Something went wrong when creating a candidate',
     hint: error.message
