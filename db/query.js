@@ -16,3 +16,5 @@ const query = (queryString, replacements = []) => {
     pool.query.call(pool, ...args)
   })
 }
+
+module.exports = query
