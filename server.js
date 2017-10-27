@@ -33,15 +33,17 @@ app.get('/users', (req, res) => res.json(users))
 app.get('/products', (req, res) => res.json(products))
 app.get('/messages', (req, res) => res.json(messages))
 app.get('/db', (req, res) => {
-  pool.query('SELECT version()', (err, ...rest) => {
+  pool.query('SELECT version()', (err, results) => {
     if (err) {
       res.json({
         error: err.message
       })
+    } else {
+      res.json({
+        ok: true,
+        results
+      })
     }
-    res.json({
-      ok: true
-    })
   })
 })
 
