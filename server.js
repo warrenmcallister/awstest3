@@ -1,5 +1,5 @@
 const express = require('express')
-const pool = require('./db/pool')
+const query = require('./db/query')
 const users = require('./data/users.json')
 const products = require('./data/products.json')
 const messages = require('./data/messages.json')
@@ -33,18 +33,9 @@ app.get('/users', (req, res) => res.json(users))
 app.get('/products', (req, res) => res.json(products))
 app.get('/messages', (req, res) => res.json(messages))
 app.get('/db', (req, res) => {
-  pool.query('SELECT version()', (err, results) => {
-    if (err) {
-      res.json({
-        error: err.message
-      })
-    } else {
-      res.json({
-        ok: true,
-        results
-      })
-    }
-  })
+  query('SELECT version()')
+    .then(results => res.json({ results }))
+    .catch(error => res.json({ error: error.message }))
 })
 
 app.listen(port, () => console.log(`Server is running at port ${port}`))
