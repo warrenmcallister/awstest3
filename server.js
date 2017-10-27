@@ -1,5 +1,5 @@
 const express = require('express')
-const query = require('./db/query')
+const setup = require('./db/setup')
 const users = require('./data/users.json')
 const products = require('./data/products.json')
 const messages = require('./data/messages.json')
@@ -32,8 +32,8 @@ app.get('/', (req, res) => {
 app.get('/users', (req, res) => res.json(users))
 app.get('/products', (req, res) => res.json(products))
 app.get('/messages', (req, res) => res.json(messages))
-app.get('/db', (req, res) => {
-  query('SELECT version()')
+app.get('/setup', (req, res) => {
+  setup()
     .then(results => res.json({ results }))
     .catch(error => res.json({ error: error.message }))
 })
