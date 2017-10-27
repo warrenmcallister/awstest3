@@ -14,7 +14,7 @@ const createCandidate = (req, res) => {
       success: true,
       hint: `Candidate "${cId}" successfully created!`
     })
-  }).catch(error => ({
+  }).catch(error => res.json({
     error: 'Something went wrong when creating a candidate',
     hint: error.message
   }))
