@@ -1,20 +1,15 @@
-var port = process.env.PORT || 3000;
-var express = require('express');
+const express = require('express')
 
-var app = express();
+const port = process.env.PORT || 3000
+
+const app = express()
 
 app.set('json spaces', 2)
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send({
     "Output": "Hello World!"
-  });
-});
+  })
+})
 
-app.post('/', function (req, res) {
-  res.send({
-    "Output": "Hello World!"
-  });
-});
-
-app.listen(port);
+app.listen(port)
