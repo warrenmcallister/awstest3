@@ -31,5 +31,13 @@ app.get('/', (req, res) => {
 app.get('/users', (req, res) => res.json(users))
 app.get('/products', (req, res) => res.json(products))
 app.get('/messages', (req, res) => res.json(messages))
+app.get('/db', (req, res) => {
+  res.json({
+    host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_USERNAME,
+    password: process.env.RDS_PASSWORD,
+    port: process.env.RDS_PORT
+  })
+})
 
 app.listen(port, () => console.log(`Server is running at port ${port}`))
