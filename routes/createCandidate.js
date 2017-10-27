@@ -1,5 +1,5 @@
 const query = require('../db/query')
-const id = require('../data/id')
+const id = require('../gen/id')
 
 const createCandidate = (req, res) => {
   const { name } = req.body
