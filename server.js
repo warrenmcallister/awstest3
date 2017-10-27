@@ -10,6 +10,7 @@ const serveJson = require('./routes/serveJson')
 const createCandidate = require('./routes/createCandidate')
 const listCandidates = require('./routes/listCandidates')
 const candidateMiddleware = require('./routes/candidateMiddleware')
+const saveSolution = require('./routes/saveSolution')
 
 const port = process.env.PORT || 3000
 
@@ -20,28 +21,27 @@ app.use(bodyParser.json())
 
 app.set('json spaces', 2)
 
-app.get('/', (req, res) => {
-  res.send({
-    resources: [
-      {
-        path: '/users',
-        descriptor: 'The users of the messaging board.'
-      },
-      {
-        path: '/products',
-        descriptor: 'The available products.'
-      },
-      {
-        path: '/messages',
-        descriptor: 'The messages posted by users on the messaging board.'
-      },
-    ]
-  })
-})
+app.get('/', serveJson({
+  resources: [
+    {
+      path: '/users',
+      descriptor: 'The users of the messaging board.'
+    },
+    {
+      path: '/products',
+      descriptor: 'The available products.'
+    },
+    {
+      path: '/messages',
+      descriptor: 'The messages posted by users on the messaging board.'
+    },
+  ]
+}))
 
 app.get('/users', candidateMiddleware, serveJson(users))
 app.get('/products', candidateMiddleware, serveJson(products))
 app.get('/messages', candidateMiddleware, serveJson(messages))
+app.post('/solution', candidateMiddleware, saveSolution)
 
 app.post('/createCandidate', createCandidate)
 app.get('/candidates', listCandidates)
