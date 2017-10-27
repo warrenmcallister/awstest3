@@ -4,9 +4,15 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "nanoid": "^1.0.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server",
+    "gen": "node gen"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }
