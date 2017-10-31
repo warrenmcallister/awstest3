@@ -46,7 +46,7 @@ app.get('/products', candidateMiddleware, serveJson(products))
 app.get('/messages', candidateMiddleware, serveJson(messages))
 app.post('/solution', candidateMiddleware, saveSolution)
 
-app.post('/createCandidate', auth, createCandidate)
+app.post('/candidates', auth, createCandidate)
 app.get('/candidates', auth, listCandidates)
 app.delete('/candidate/:id', auth, deleteCandidate)
 
