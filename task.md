@@ -1,17 +1,21 @@
 # Workday Coding Challenge
 
-Your task is to find out about the interests of the users of our messaging board, so we can show them more accurate ads to them. You have been given access to a rest API which exposes the resources needed to solve the challenge.  
+Your task is to collect data on the product interests of our message board users, so we can send them targeted ads for our products. You have been given access to a rest API which exposes the resources needed to solve the challenge.
 
 # Endpoints
 
 **Root**: ${endpointRoot}
 **Candidate ID**: `${candidateId}`
 
-Always send your candidate ID as a query parameter - `?candidate=${candidateId}` - when accessing any of the endpoints below, otherwise you won't get a proper response.
+Always send your candidate ID as a query parameter when accessing any of the endpoints below. 
+
+Example: `?candidate=${candidateId}`
+
+Otherwise, you won't get a proper response.
 
 ## GET /users?candidate=${candidateId}
 
-This endpoint returns a list of our `user`s identified by an `id` and a `name`, similar to this:
+This endpoint returns a list of our users identified by an id and a name. Example:
 
 ```json
 [
@@ -32,7 +36,8 @@ This endpoint returns a list of our `user`s identified by an `id` and a `name`, 
 
 ## GET /products?candidate=${candidateId}
 
-This endpoint returns a list of our available `product`s, which have an `id`, a `name` and an associated `color`:
+This endpoint returns a list of our available products, which have an id, a name, and an associated
+color. Example:
 
 ```json
 [
@@ -56,7 +61,7 @@ This endpoint returns a list of our available `product`s, which have an `id`, a 
 
 ## GET /messages?candidate=${candidateId}
 
-This endpoint exposes a list of messages on our message board, which we would like to analyse. A `message` object has an `id`, the identifier of it's creator (`creatorId`) and the `text`:
+This endpoint exposes a list of messages on our message board, which we would like to analyse. A message object has an id, a creator id (creatorId), and text. Example:
 
 ```json
 [
@@ -79,13 +84,14 @@ This endpoint exposes a list of messages on our message board, which we would li
 ```
 
 ## POST /solution?candidate=${candidateId}
-To complete the task you should `POST` a JSON array to this URL. You should send an array of objects, that contain the users, and their respective interests in products.
+To complete the task, you should POST a JSON array to this URL. You should send an array of
+objects that contains the users and their respective product interests.
 
-- A user is considered to be interested in a product, if he/she mentions either the products full `name` or it's `color` in any of his/her messages on the board. 
-- You can assume that the users have no typos in the names/colors and they use the same case as in the product listing.
-- The array should be sorted by the users `id` and should not contain duplicates.
-- In case the user is interested in multiple `products`, his/her `products` array should be sorted by product `id`.
-- The array `products` should not contain duplicates.
+-	A user is considered to be interested in a product if he/she mentions either the product's full name or its color in any of his/her messages on the board.
+- You can assume that user messages have no typos, and that the letter casing of product names/colors remains unchanged.
+-	Your JSON array should be sorted by user id, and should not contain duplicate users.
+- If a user is interested in multiple products, his/her products array should be sorted by product id.
+-	A user's products arrays should not contain duplicate products.
 
 **Example solution** (using the input above):
 
@@ -131,3 +137,5 @@ To complete the task you should `POST` a JSON array to this URL. You should send
   }
 ]
 ```
+
+When you complete the task, send the source code to the recruiting team in email!

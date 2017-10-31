@@ -42,7 +42,7 @@ const saveSolution = (req, res) => {
   query('UPDATE candidates SET completed=1 WHERE id=?', [candidate]).then(candidates => {
     res.json({
       success: true,
-      message: 'Success! Please send your code to the hiring staff!',
+      message: 'Success! Please send your code to the recruiting team in email!',
       hint: 'Before you send it try cleaning it up for extra cookie points!'
     })
   }).catch(error => res.json({
