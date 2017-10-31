@@ -10,3 +10,5 @@ const generatePdf = (req, res) => {
       hint: error.message
     }))
 }
+
+module.exports = generatePdf
