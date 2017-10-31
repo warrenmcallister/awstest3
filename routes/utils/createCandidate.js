@@ -1,5 +1,5 @@
 const removeAccents = require('remove-accents')
-const query = require('../db/query')
+const query = require('../../db/query')
 
 const createCandidate = ({ name }) => {
   if (!name || name.length === 0) {
