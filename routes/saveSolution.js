@@ -1,6 +1,33 @@
-const isArray = require('lodash/isArray')
-const isEqual = require('lodash/isEqual')
-const isObject = require('lodash/isObject')
+const isNil = require('lodash/isNil')
+const joi = require('joi')
+
+/*"user": {
+  "id": "Bs6lj",
+  "name": "Gus Schiller I"
+},
+"products": [
+  {
+    "id": "0nJtv",
+    "name": "Practical Metal Fish",
+    "color": "grey"
+  }
+*/
+const schema = joi.array().items(
+  joi.object({
+    user: joi.object({
+      id: joi.string().required(),
+      name: joi.string().required(),
+    }).required(),
+    products: joi.array().items(
+      joi.object({
+        id: joi.string().required(),
+        name: joi.string().required(),
+        color: joi.string().required()
+      })
+    ).required()
+  }).required()
+).required()
+
 
 const query = require('../db/query')
 const expected = require('../data/solution.json')
@@ -9,33 +36,12 @@ const saveSolution = (req, res) => {
   const solution = req.body
   const { candidate } = req.query
 
-  if (!isArray(solution)) {
+  const { error, value } = joi.validate(solution, schema)
+  if (!isNil(error)) {
     return res.json({
-      error: 'Unexpected format!',
-      hint: 'Request body should be an array. Check the task description for more details!'
+      error: 'Your input doesnt conform the expected shape!',
+      hint: error.details
     })
-  }
-
-  for (let i = 0; i < solution.length; i++) {
-    const entry = solution[i]
-    if (!isObject(entry)) {
-      return res.json({
-        error: `Entry at index ${i} is not an object!`,
-        hint: 'Check the task description for more details!'
-      })
-    }
-    if (!isObject(entry.user)) {
-      return res.json({
-        error: `Value for key 'user' in entry at index ${i} isn't an object!`,
-        hint: 'Check the task description for more details!'
-      })
-    }
-    if (!isArray(entry.products)) {
-      return res.json({
-        error: `Value for key 'products' in entry at index ${i} isn't an array!`,
-        hint: 'Check the task description for more details!'
-      })
-    }
   }
 
   if (!isEqual(expected, solution)) {
