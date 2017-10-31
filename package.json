@@ -7,16 +7,16 @@
     "basicauth-middleware": "^3.0.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "faker": "^4.1.0",
     "joi": "^13.0.1",
     "lodash": "^4.17.4",
+    "markdown-pdf": "^8.0.0",
     "mysql": "^2.15.0",
-    "nanoid": "^1.0.0"
+    "nanoid": "^1.0.0",
+    "remove-accents": "^0.4.1"
   },
   "scripts": {
     "start": "node server",
     "gen": "node gen"
-  },
-  "devDependencies": {
-    "faker": "^4.1.0"
   }
 }

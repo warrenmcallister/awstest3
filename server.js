@@ -14,6 +14,7 @@ const getCandidate = require('./routes/getCandidate')
 const candidateMiddleware = require('./routes/candidateMiddleware')
 const saveSolution = require('./routes/saveSolution')
 const deleteCandidate = require('./routes/deleteCandidate')
+const generatePdf = require('./routes/generatePdf')
 
 const port = process.env.PORT || 3000
 
@@ -59,6 +60,7 @@ app.post('/candidates', auth, createCandidate)
 app.get('/candidates', auth, listCandidates)
 app.delete('/candidates/:id', auth, deleteCandidate)
 app.get('/candidates/:id', auth, getCandidate)
+app.get('/createTaskPdf', auth, generatePdf)
 
 app.get('/setup', (req, res) => {
   setup()

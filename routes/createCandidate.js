@@ -1,5 +1,5 @@
+const removeAccents = require('remove-accents')
 const query = require('../db/query')
-const id = require('../gen/id')
 
 const createCandidate = (req, res) => {
   const { name } = req.body
@@ -8,11 +8,12 @@ const createCandidate = (req, res) => {
       error: 'name field is mandatory'
     })
   }
-  const cId = `${name.toLowerCase().replace(' ', '-')}-${id()}`
-  query('INSERT INTO candidates VALUES (?, ?)', [cId, 0]).then(response => {
+  const id = removeAccents(`${name.toLowerCase().replace(/\s\s+/g, '-')}`)
+  query('INSERT INTO candidates VALUES (?, ?)', [id, 0]).then(response => {
     res.json({
+      id,
       success: true,
-      hint: `Candidate "${cId}" successfully created!`
+      hint: `Candidate '${name}' successfully created with id '${id}'!`
     })
   }).catch(error => res.json({
     error: 'Something went wrong when creating a candidate',
