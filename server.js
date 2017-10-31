@@ -10,6 +10,7 @@ const messages = require('./data/messages.json')
 const serveJson = require('./routes/serveJson')
 const createCandidate = require('./routes/createCandidate')
 const listCandidates = require('./routes/listCandidates')
+const getCandidate = require('./routes/getCandidate')
 const candidateMiddleware = require('./routes/candidateMiddleware')
 const saveSolution = require('./routes/saveSolution')
 const deleteCandidate = require('./routes/deleteCandidate')
@@ -48,7 +49,8 @@ app.post('/solution', candidateMiddleware, saveSolution)
 
 app.post('/candidates', auth, createCandidate)
 app.get('/candidates', auth, listCandidates)
-app.delete('/candidate/:id', auth, deleteCandidate)
+app.delete('/candidates/:id', auth, deleteCandidate)
+app.get('/candidates/:id', auth, getCandidate)
 
 app.get('/setup', (req, res) => {
   setup()
