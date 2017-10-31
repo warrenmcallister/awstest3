@@ -12,7 +12,7 @@ const deleteCandidate = (req, res) => {
     }
     return res.json(candidates[0])
   }).catch(error => res.json({
-    error: 'Something went wrong when deleting a candidate',
+    error: 'Something went wrong when getting a candidate',
     hint: error.message
   }))
 }
