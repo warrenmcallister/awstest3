@@ -136,4 +136,4 @@ To complete the task, you should POST a JSON array to this URL. You should send 
 ]
 ```
 
-When you complete the task, send the source code to the recruiting team in email!
+### When you complete the task, send the source code to the recruiting team in email!
