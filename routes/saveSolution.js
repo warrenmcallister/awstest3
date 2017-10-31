@@ -1,17 +1,9 @@
 const isNil = require('lodash/isNil')
 const joi = require('joi')
 
-/*"user": {
-  "id": "Bs6lj",
-  "name": "Gus Schiller I"
-},
-"products": [
-  {
-    "id": "0nJtv",
-    "name": "Practical Metal Fish",
-    "color": "grey"
-  }
-*/
+const query = require('../db/query')
+const expected = require('../data/solution.json')
+
 const schema = joi.array().items(
   joi.object({
     user: joi.object({
@@ -27,10 +19,6 @@ const schema = joi.array().items(
     ).required()
   }).required()
 ).required()
-
-
-const query = require('../db/query')
-const expected = require('../data/solution.json')
 
 const saveSolution = (req, res) => {
   const solution = req.body
