@@ -1,8 +1,16 @@
 const createCandidate = require('./utils/createCandidate')
 const createPdf = require('./utils/createPdf')
+const url = require('url')
+
+const fullUrl = (req) => {
+  return url.format({
+    protocol: req.protocol,
+    host: req.get('host'),
+  });
+}
 
 const generatePdf = (req, res) => {
-  const endpointRoot = req.app.mountpath || req.baseUrl
+  const endpointRoot = fullUrl(req)
   createCandidate(req.query)
     .then(candidateId => createPdf({ candidateId, endpointRoot }))
     .then(buffer => res.end(buffer, 'binary'))
