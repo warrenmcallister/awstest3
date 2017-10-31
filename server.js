@@ -29,15 +29,23 @@ app.get('/', serveJson({
   resources: [
     {
       path: '/users',
-      descriptor: 'The users of the messaging board.'
+      descriptor: 'The users of the messaging board.',
+      method: 'GET'
     },
     {
       path: '/products',
-      descriptor: 'The available products.'
+      descriptor: 'The available products.',
+      method: 'GET'
     },
     {
       path: '/messages',
-      descriptor: 'The messages posted by users on the messaging board.'
+      descriptor: 'The messages posted by users on the messaging board.',
+      method: 'GET'
+    },
+    {
+      path: '/solution',
+      descriptor: 'Send your soluton (a JSON array as request body) to this URL',
+      method: 'POST'
     },
   ]
 }))
