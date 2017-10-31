@@ -36,8 +36,7 @@ This endpoint returns a list of our users identified by an id and a name. Exampl
 
 ## GET /products?candidate=${candidateId}
 
-This endpoint returns a list of our available products, which have an id, a name, and an associated
-color. Example:
+This endpoint returns a list of our available products, which have an id, a name, and an associated color. Example:
 
 ```json
 [
@@ -84,8 +83,7 @@ This endpoint exposes a list of messages on our message board, which we would li
 ```
 
 ## POST /solution?candidate=${candidateId}
-To complete the task, you should POST a JSON array to this URL. You should send an array of
-objects that contains the users and their respective product interests.
+To complete the task, you should POST a JSON array to this URL. You should send an array of objects that contains the users and their respective product interests.
 
 -	A user is considered to be interested in a product if he/she mentions either the product's full name or its color in any of his/her messages on the board.
 - You can assume that user messages have no typos, and that the letter casing of product names/colors remains unchanged.
