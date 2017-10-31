@@ -9,7 +9,9 @@ const createCandidate = ({ name }) => {
   return query('INSERT INTO candidates VALUES (?, ?)', [id, 0])
     .then(response => id)
     .catch(error => {
-      console.log(error)
+      if (error.code && error.code === 'ER_DUP_ENTRY') {
+        return Promise.resolve(id)
+      }
       return Promise.reject(error)
     })
 }
