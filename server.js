@@ -41,7 +41,6 @@ app.get('/', serveJson({
   ]
 }))
 
-app.get('/admin', serveJson({ user: process.env.ADMIN_USER, pass: process.env.ADMIN_PASS }))
 app.get('/users', candidateMiddleware, serveJson(users))
 app.get('/products', candidateMiddleware, serveJson(products))
 app.get('/messages', candidateMiddleware, serveJson(messages))
