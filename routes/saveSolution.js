@@ -1,6 +1,6 @@
 const isNil = require('lodash/isNil')
+const isEqual = require('lodash/isEqual')
 const joi = require('joi')
-
 const query = require('../db/query')
 const expected = require('../data/solution.json')
 
