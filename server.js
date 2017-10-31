@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const basicauthMiddleware = require('basicauth-middleware')
 
 const setup = require('./db/setup')
 const users = require('./data/users.json')
@@ -11,11 +12,13 @@ const createCandidate = require('./routes/createCandidate')
 const listCandidates = require('./routes/listCandidates')
 const candidateMiddleware = require('./routes/candidateMiddleware')
 const saveSolution = require('./routes/saveSolution')
+const deleteCandidate = require('./routes/deleteCandidate')
 
 const port = process.env.PORT || 3000
 
 const app = express()
 
+const auth = basicauthMiddleware(process.env.ADMIN_USER, process.env.ADMIN_PASS)
 
 app.use(bodyParser.json())
 
@@ -38,13 +41,15 @@ app.get('/', serveJson({
   ]
 }))
 
+app.get('/admin', serveJson({ user: process.env.ADMIN_USER, pass: process.env.ADMIN_PASS }))
 app.get('/users', candidateMiddleware, serveJson(users))
 app.get('/products', candidateMiddleware, serveJson(products))
 app.get('/messages', candidateMiddleware, serveJson(messages))
 app.post('/solution', candidateMiddleware, saveSolution)
 
-app.post('/createCandidate', createCandidate)
-app.get('/candidates', listCandidates)
+app.post('/createCandidate', auth, createCandidate)
+app.get('/candidates', auth, listCandidates)
+app.delete('/candidate/:id', auth, deleteCandidate)
 
 app.get('/setup', (req, res) => {
   setup()
