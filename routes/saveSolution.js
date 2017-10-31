@@ -16,9 +16,9 @@ const schema = joi.array().items(
         name: joi.string().required(),
         color: joi.string().required()
       })
-    ).required()
+    )
   }).required()
-).required()
+)
 
 const saveSolution = (req, res) => {
   const solution = req.body
